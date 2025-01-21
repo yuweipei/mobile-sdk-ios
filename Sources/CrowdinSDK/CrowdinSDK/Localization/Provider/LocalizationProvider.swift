@@ -84,9 +84,9 @@ class LocalizationProvider: NSObject, LocalizationProviderProtocol {
         }
     }
     
-    func prepare(with completion:  @escaping () -> Void) {
+    func prepare(with completion: @escaping () -> Void) {
         let shouldFetchLocalization = self.localizations.count == 0 // Remote storage doesn't contain any languages. Probably first run, no information about supported localizations.
-        remoteStorage.prepare { weak self] in
+        remoteStorage.prepare { [weak self] in
             guard let self = self else { return }
             if shouldFetchLocalization {
                 self.refreshLocalization { _ in
